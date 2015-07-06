@@ -37,17 +37,21 @@ return NO;
 }
 
 - (void)handleChangeServerAction {
-
-NSString *message = [self getFirstParameter];
+    
+    NSString *message = [self getFirstParameter];
     
     [[AppDelegate_Shared currentInstance] saveServerAddressAndURLWithValue:message];
-    [[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
+    UIWindow *win= [[AppDelegate_Shared currentInstance] window];
     
-    /*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:message forKey:@"server_address_preference"];
-    [defaults synchronize];*/
+    win.rootViewController = [[[self gxActionHandlerViewController] actionHandlerViewController]initWithNibName:nil bundle:nil];
+    
+    [[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
+     /*NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     [defaults setObject:message forKey:@"server_address_preference"];
+     [defaults synchronize];*/
+    
 
-    [self onFinishedExecutingWithSuccess];
+    //[self onFinishedExecutingWithSuccess];
 }
 
 - (NSString*)getFirstParameter {
