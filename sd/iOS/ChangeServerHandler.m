@@ -41,8 +41,16 @@ return NO;
 }
 
 - (void)handleChangeServerAction {
-
-    NSString *message = [self getFirstParameter];
+	 [[AppDelegate_Shared currentInstance] saveServerAddressAndURLWithValue:message];
+     [[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self onFinishedExecutingWithSuccess];
+	});
+    
+}
+- (void)handleChangeServerFirstAction {
+    
+   NSString *message = [self getFirstParameter];
 
     [[AppDelegate_Shared currentInstance] saveServerAddressAndURLWithValue:message];
     UIWindow *win= [[AppDelegate_Shared currentInstance] window];
@@ -56,15 +64,6 @@ return NO;
     
     //NSTimeInterval interval= 5.0;
     //[self onFinishedExecutingWithSuccessAfterDelay:interval];
-    [self onFinishedExecutingWithSuccess];
-}
-- (void)handleChangeServerFirstAction {
-    
-    NSString *message = [self getFirstParameter];
-    
-    [[AppDelegate_Shared currentInstance] saveServerAddressAndURLWithValue:message];
-    [[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
-
     [self onFinishedExecutingWithSuccess];
 }
 
