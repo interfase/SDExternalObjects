@@ -44,11 +44,13 @@ return NO;
 	NSString *message = [self getFirstParameter];
 	
 	 [[AppDelegate_Shared currentInstance] saveServerAddressAndURLWithValue:message];
-     [[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
+	 UIWindow *win= [[AppDelegate_Shared currentInstance] window];
+     win.rootViewController = [[[self gxActionHandlerViewController] actionHandlerViewController]initWithNibName:nil bundle:nil];
+	
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
 		[self onFinishedExecutingWithSuccess];
 	});
-    
 }
 - (void)handleChangeServerFirstAction {
     
