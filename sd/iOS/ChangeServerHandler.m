@@ -46,9 +46,8 @@ return NO;
 	 [[AppDelegate_Shared currentInstance] saveServerAddressAndURLWithValue:message];
 	 UIWindow *win= [[AppDelegate_Shared currentInstance] window];
      win.rootViewController = [[[self gxActionHandlerViewController] actionHandlerViewController]initWithNibName:nil bundle:nil];
-	
+	[[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[[AppDelegate_Shared currentInstance] loadModelAndViews:NO];
 		[self onFinishedExecutingWithSuccess];
 	});
 }
